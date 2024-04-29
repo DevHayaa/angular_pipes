@@ -1,0 +1,37 @@
+<div class="container-fluid">
+<div class="row">
+    <div class="col-lg-3 my-5">
+        <h6>Search User</h6>
+        <input type="text" [(ngModel)]="searchText" class="form-control">
+    </div>
+
+    <div class="col-lg-10 col-md-10">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Sr</th>
+                    <th *ngFor="let head of HeadArray">{{head.Head}}</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of UserArray |filter:searchText;let sr=index "  >
+                    <td>{{sr+1}}</td>
+                    <td *ngFor="let head of HeadArray" >
+                        <div *ngIf="head.FieldName != ''">
+                            {{user[head.FieldName]}}
+                        </div>
+                       <div *ngIf="head.FieldName == ''">
+                       <button (click)="edit(user)" class="btn btn-primary">Edit</button>
+                       <button (click)="delete(user)" class="btn btn-danger" style="margin: 8px;">Delete</button>
+                       </div>
+                       </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+<p>Capitalize and Replace Spaces with Underscores:</p>
+<input type="text" [(ngModel)]="inputString" class="form-control my-3" placeholder="Enter here">
+<span>Transformed String: {{ inputString | customPipe }}</span>
